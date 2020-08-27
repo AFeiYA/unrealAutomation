@@ -11,6 +11,11 @@ AWarrior::AWarrior()
 
 }
 
+void AWarrior::BeginPlay() {
+		Super::BeginPlay();
+		SetLifeSpan(5);
+}
+
 FString AWarrior::ToString()
 {
 	return FString("What's the fuck!!"+ Name);

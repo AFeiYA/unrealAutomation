@@ -14,6 +14,10 @@ class AUTOMATION_API AWarrior : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AWarrior();
+
+	virtual void BeginPlay() override;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
 		FString Name;
 	UFUNCTION(BlueprintCallable, Category = Properties)
