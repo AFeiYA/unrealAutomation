@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "MyGameMode.h"
+#include "Kismet/GameplayStatics.h"
 #include "MyTriggerVolume.h"
-
 // Sets default values
 AMyTriggerVolume::AMyTriggerVolume()
 {
@@ -13,6 +13,15 @@ AMyTriggerVolume::AMyTriggerVolume()
 
 void AMyTriggerVolume::NotifyActorBeginOverlap(AActor * OtherActor)
 {
+	UWorld* TheWorld = GetWorld();
+	if (ensure(GetWorld())) {
+		AGameMode* GameMode = (AGameMode*)UGameplayStatics::GetGameMode(TheWorld);
+		AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+		if (MyGameMode != nullptr) {
+			MyGameMode->MyStandardDelegate.ExecuteIfBound();
+		}
+	}
+
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::Printf(TEXT("%s entered me!"), *(OtherActor->GetName())));
 }
 

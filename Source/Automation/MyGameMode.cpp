@@ -17,12 +17,7 @@ void AMyGameMode::BeginPlay() {
 
 }
 
-void AMyGameMode::EnableLight()
-{
-	PointLight = CreateDefaultSubobject<UPointLightComponent>("PointLight");
-	RootComponent = PointLight;
-	PointLight->SetVisibility(false);
-}
+
 
 void AMyGameMode::DestroyActorFunction()
 {

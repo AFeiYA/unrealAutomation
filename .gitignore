@@ -75,3 +75,5 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 Content/Python/.vscode/
 Content/Materialize/
+Source/Automation/MyTriggerBoxB.cpp
+Source/Automation/MyTriggerBoxB.h
