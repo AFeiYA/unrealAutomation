@@ -2,6 +2,7 @@
 
 #include "EditorUtilityLibrary.h"
 #include "Engine/Texture.h"
+#include "EditorAssetLibrary.h"
 #include "MyAssetActionUtility.h"
 
 #pragma region RenameSelectedAssets
@@ -82,6 +83,24 @@ void UMyAssetActionUtility::AddPrefix()
 		
 	}
 	GiveFeedBack("Added prefix to", Counter);
+}
+#pragma endregion
+
+#pragma region CleanupFolder
+void UMyAssetActionUtility::CleanupFolder(FString ParentFolder) {
+
+	TArray<UObject*> SelectedObjects = UEditorUtilityLibrary::GetSelectedAssets();
+	uint32 Counter = 0;
+	for (UObject* SelectedObject : SelectedObjects) {
+		if (ensure(SelectedObject)) {
+			FString NewPath = FPaths::Combine(ParentFolder, SelectedObject->GetClass()->GetName(),SelectedObject->GetName());
+			if (UEditorAssetLibrary::RenameLoadedAsset(SelectedObject, NewPath)) {
+				++Counter;
+			}
+		}
+	}
+
+	GiveFeedBack("Moved", Counter);
 }
 #pragma endregion
 

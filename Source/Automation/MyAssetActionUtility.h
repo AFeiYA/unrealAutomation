@@ -40,8 +40,17 @@ public:
 	UFUNCTION(CallInEditor)
 		void CheckPowerOfTwo();
 
+	/**
+	*Add prefix for selected assets.
+	**/
 	UFUNCTION(CallInEditor)
 		void AddPrefix();
+
+	/**
+	*Auto create folders for selected assets.
+	**/
+	UFUNCTION(CallInEditor)
+		void CleanupFolder(FString ParentFolder = FString("/Game"));
 
 private:
 	const TMap<UClass*, FString> PrefixMap = {
