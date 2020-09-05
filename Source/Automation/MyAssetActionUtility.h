@@ -23,9 +23,14 @@ public:
 	**/
 	UFUNCTION(CallInEditor)
 		void RenameSelectedAssets(FString SearchPattern, FString ReplacePattern, ESearchCase::Type SearchCase);
-
+	/**
+	*Check if a texture is power of two .
+	**/
+	UFUNCTION(CallInEditor)
+		void CheckPowerOfTwo();
 
 private:
+	bool IsPowerOfTwo(int32 NumberToCheck);
 	void PrintToScreen(FString Message, FColor Color);
 	void GiveFeedBack(FString Method , uint32 Counter);
 };
