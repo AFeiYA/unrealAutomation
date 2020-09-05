@@ -56,9 +56,34 @@ void UMyAssetActionUtility::CheckPowerOfTwo()
 	GiveFeedBack("power of two", Counter);
 
 }
-
 #pragma endregion
 
+#pragma region AddPrefix
+void UMyAssetActionUtility::AddPrefix()
+{
+	TArray<UObject*> SelectedObjs = UEditorUtilityLibrary::GetSelectedAssets();
+	uint32 Counter = 0;
+	for (UObject* SelectedObject : SelectedObjs) {
+		if (ensure(SelectedObject)) {
+			const FString* Prefix = PrefixMap.Find(SelectedObject->GetClass());
+			if (ensure(Prefix) && !Prefix->Equals("")) {
+				FString OldName = SelectedObject->GetName();
+				if (!OldName.StartsWith(*Prefix)) {
+					FString NewName = *Prefix + OldName;
+					UEditorUtilityLibrary::RenameAsset(SelectedObject,NewName);
+					++Counter;
+				}
+			}
+			else {
+				PrintToScreen("Can't find prefix for class " + SelectedObject->GetClass()->GetName(), FColor::Red);
+			}
+			
+		}
+		
+	}
+	GiveFeedBack("Added prefix to", Counter);
+}
+#pragma endregion
 
 
 #pragma region Helper
